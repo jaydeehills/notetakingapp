@@ -1,7 +1,7 @@
 <!DOCTYPE html><script>
 
 const field = document.querySelector('textarea');
-const backUp = field.getAttribute('placeholder')
+
 const btn = document.querySelector('.btn');
 const clear = document.getElementById('clear')
 const submit = document.querySelector('#submit')
@@ -13,6 +13,7 @@ const comments_arr = [];
 
 // to generate html list based on comments array
 const display_comments = () => {
+  console.log("display_comment");
   let list = '<ul>';
    comments_arr.forEach(comment => {
     list += `<li>${comment}</li>`;
@@ -22,6 +23,7 @@ const display_comments = () => {
 }
 
 clear.onclick = function(event){
+  console.log("clear");
   event.preventDefault();
   // reset the array  
    comments_arr.length = 0;
@@ -30,6 +32,7 @@ clear.onclick = function(event){
 }
 
 submit.onclick = function(event){
+  console.log("submit");
     event.preventDefault();
     const content = field.value;
     if(content.length > 0){ // if there is content
@@ -52,7 +55,7 @@ submit.onclick = function(event){
            <textarea id="commentinput" placeholder="Add Your Comment" value=" "></textarea>
            <div class="btn">
                <input id="submit" type="submit" value="Comment">
-               <button id="erase">  
+               <button id="clear">  
                 &#128591;</button>
            </div> 
         </form>
