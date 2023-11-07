@@ -1,75 +1,97 @@
-<!DOCTYPE html><script>
+<!DOCTYPE html>
 
-const field = document.querySelector('textarea');
+<script>
 
-const btn = document.querySelector('.btn');
-const clear = document.getElementById('clear')
-const submit = document.querySelector('#submit')
-// const comments = document.querySelector('#comment-box')
-const comments = document.getElementById('comment-box');
+    // alert("hello");
+    function postComment() {
+        let comment = document.getElementById("comment_input").value;
 
-// array to store the comments
-const comments_arr = [];
+        let ol = document.getElementById("post_list");
+        // now we want to add a <li> with the comment inside
+        //document.createElement("li");
+        const li = document.createElement('li');
+        li.innerHTML = comment + "   <br><b> -- " + addTimeStamp() + "</b>";
 
-// to generate html list based on comments array
-const display_comments = () => {
-  console.log("display_comment");
-  let list = '<ul>';
-   comments_arr.forEach(comment => {
-    list += `<li>${comment}</li>`;
-  })
-  list += '</ul>';
-  comments.innerHTML = list;
-}
+        ol.appendChild(li);
 
-clear.onclick = function(event){
-  console.log("clear");
-  event.preventDefault();
-  // reset the array  
-   comments_arr.length = 0;
-  // re-genrate the comment html list
-  display_comments();
-}
+        // .innerHTML = "somethings"
+        // .appendChild()
 
-submit.onclick = function(event){
-  console.log("submit");
-    event.preventDefault();
-    const content = field.value;
-    if(content.length > 0){ // if there is content
-      // add the comment to the array
-      comments_arr.push(content);
-      // re-genrate the comment html list
-      display_comments();
-      // reset the textArea content 
-      field.value = '';
     }
-}
+
+    function addTimeStamp() {
+        var d = new Date(),
+            month = d.getMonth() + 1,
+            day = (d.getDate() < 10) ? "0" + d.getDate() : d.getDate(),
+            year = d.getFullYear(),
+            hours = d.getHours(),
+            minutes = d.getMinutes(),
+            seconds = (d.getSeconds() < 10) ? "0" + d.getSeconds() : d.getSeconds();
+
+        if (hours > 12) {
+            hours -= 12;
+        } else if (hours === 0) {
+            hours = 12;
+        }
+
+        var today = hours + ":" + minutes + ":" + seconds + " " + month + "/" + day + "/" + year;
+        return today;
+    }
 
 </script>
 
 <body>
 
-    <div class="My container">
-        <h2>Leave us a comment</h2>
-        <form>
-           <textarea id="commentinput" placeholder="Add Your Comment" value=" "></textarea>
-           <div class="btn">
-               <input id="submit" type="submit" value="Comment">
-               <button id="clear">  
-                &#128591;</button>
-           </div> 
-        </form>
-    </div>
-    <div class="comments">
-        <h1>Something
-            
-        </h1>
-       <h2>Comments</h2>
-        <div id="comment-box">
-        </div>
-    </div>   
+    <textarea 
     
+    type="text" 
+    id="comment_input" 
+    name="comment" 
+    required minlength="4" 
+    maxlength="140" 
+    size="20"
+    rows="5"
+    cols="30"
+    placeholder="Write comment here.">
+
+</textarea>
+
+    <button type="button" onclick="postComment()">
+        Submit
+    </button>
+
+    <ol id="post_list">
+
+      
+
+
+    </ol>
+
 </body>
 
-</html>
 
+<!-- THINGS TO ADD
+
+    SIGN IN PAGE
+
+    Login page (sign in with Google, Apple ID, etc.)
+    
+
+    COMMENT FEATURE
+
+    Assign user to comments.
+    "You must sign in to enter comment"
+    Add timestamp tp comment section.
+    Allow other users to reply to other comments.
+    Upvote/downvote
+    Save comment
+    Report
+    User tag and link to profile
+
+
+
+
+-->
+
+
+</html>
