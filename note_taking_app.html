@@ -1,44 +1,6 @@
 <!DOCTYPE html>
 
-<script>
 
-    // alert("hello");
-    function postComment() {
-        let comment = document.getElementById("comment_input").value;
-
-        let ol = document.getElementById("post_list");
-        // now we want to add a <li> with the comment inside
-        //document.createElement("li");
-        const li = document.createElement('li');
-        li.innerHTML = comment + "   <br><b> -- " + addTimeStamp() + "</b>";
-
-        ol.appendChild(li);
-
-        // .innerHTML = "somethings"
-        // .appendChild()
-
-    }
-
-    function addTimeStamp() {
-        var d = new Date(),
-            month = d.getMonth() + 1,
-            day = (d.getDate() < 10) ? "0" + d.getDate() : d.getDate(),
-            year = d.getFullYear(),
-            hours = d.getHours(),
-            minutes = d.getMinutes(),
-            seconds = (d.getSeconds() < 10) ? "0" + d.getSeconds() : d.getSeconds();
-
-        if (hours > 12) {
-            hours -= 12;
-        } else if (hours === 0) {
-            hours = 12;
-        }
-
-        var today = hours + ":" + minutes + ":" + seconds + " " + month + "/" + day + "/" + year;
-        return today;
-    }
-
-</script>
 
 <body>
 
@@ -92,6 +54,55 @@
 
 
 -->
+<script>
 
+  function saveComment(comment) {
+    localStorage.setItem("joel", comment);
+  }
+  
+  function loadComment() {
+    console.log("hey");
+    const comment_input = localStorage.getItem("joel");
+    localStorage.getItem("joel");
+    displayComment(comment_input);
+  }
+  
+  function displayComment(comment) {
+          let ol = document.getElementById("post_list");
+          // now we want to add a <li> with the comment inside
+          //document.createElement("li");
+          const li = document.createElement('li');
+          li.innerHTML = comment + "   <br><b> -- " + addTimeStamp() + "</b>";
+  
+          ol.appendChild(li);
+  }
+  
+      // alert("hello");
+      function postComment() {
+          let comment = document.getElementById("comment_input").value;
+          saveComment(comment);
+          displayComment(comment);
+        }
+  
+      function addTimeStamp() {
+          var d = new Date(),
+              month = d.getMonth() + 1,
+              day = (d.getDate() < 10) ? "0" + d.getDate() : d.getDate(),
+              year = d.getFullYear(),
+              hours = d.getHours(),
+              minutes = d.getMinutes(),
+              seconds = (d.getSeconds() < 10) ? "0" + d.getSeconds() : d.getSeconds();
+  
+          if (hours > 12) {
+              hours -= 12;
+          } else if (hours === 0) {
+              hours = 12;
+          }
+  
+          var today = hours + ":" + minutes + ":" + seconds + " " + month + "/" + day + "/" + year;
+          return today;
+      }
+      loadComment();
+  </script>
 
 </html>
