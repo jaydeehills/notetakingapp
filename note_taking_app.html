@@ -56,8 +56,11 @@
 -->
 <script>
 
-  function saveComment(comment) {
-    localStorage.setItem("joel", comment);
+  function saveComment(commentToSave) {
+    const previous_comments = [localStorage.getItem("joel")].flat();
+    previous_comments.push(commentToSave);
+    console.log(previous_comments);
+    localStorage.setItem("joel", previous_comments);
   }
   
   function loadComment() {
@@ -66,22 +69,29 @@
     localStorage.getItem("joel");
     displayComment(comment_input);
   }
+
+  function loadComments() {
+    const array1 = [localStorage.getItem("joel")];
+    array1.flat().forEach((element) => displayComment(element));
+
+
+  }
   
-  function displayComment(comment) {
+  function displayComment(commentToDisplay) {
           let ol = document.getElementById("post_list");
           // now we want to add a <li> with the comment inside
           //document.createElement("li");
           const li = document.createElement('li');
-          li.innerHTML = comment + "   <br><b> -- " + addTimeStamp() + "</b>";
+          li.innerHTML = commentToDisplay + "   <br><b> -- " + addTimeStamp() + "</b>";
   
           ol.appendChild(li);
   }
   
       // alert("hello");
       function postComment() {
-          let comment = document.getElementById("comment_input").value;
-          saveComment(comment);
-          displayComment(comment);
+          let userComment = document.getElementById("comment_input").value;
+          saveComment (userComment);
+          displayComment(userComment);
         }
   
       function addTimeStamp() {
@@ -102,7 +112,8 @@
           var today = hours + ":" + minutes + ":" + seconds + " " + month + "/" + day + "/" + year;
           return today;
       }
-      loadComment();
+     // loadComment();
+     loadComments();
   </script>
 
 </html>
